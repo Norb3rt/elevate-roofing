@@ -1,0 +1,21 @@
+# Elevate Roofing Services
+
+> Licensed roofing contractor serving Los Angeles and Orange County — installation, repair, and replacement with free estimates.
+
+Elevate Roofing Services delivers premium residential and commercial roofing across Southern California. We specialize in asphalt shingle, clay/concrete tile, standing seam metal, and flat/TPO systems, with rapid storm response and HOA-compliant installations.
+
+## Pages
+
+- [Home](/): Overview of services, instant roofing estimator, and customer testimonials.
+- [Locations](/locations): Full list of cities served across Los Angeles and Orange County.
+
+## Service areas
+
+- [Los Angeles](/roofing/los-angeles): Roofing services in Los Angeles.
+- [Long Beach](/roofing/long-beach): Coastal roofing for Long Beach homes.
+- [Pasadena](/roofing/pasadena): Roofing for Pasadena's Craftsman and Spanish Revival homes.
+- [Santa Monica](/roofing/santa-monica): Ocean-front durable roofing in Santa Monica.
+- [Irvine](/roofing/irvine): HOA-compliant roofing in Irvine.
+- [Anaheim](/roofing/anaheim): Residential and commercial roofing in Anaheim.
+- [Newport Beach](/roofing/newport-beach): Estate-quality tile and slate roofing in Newport Beach.
+- [Malibu](/roofing/malibu): Class A fire-resistant roofing in Malibu.
