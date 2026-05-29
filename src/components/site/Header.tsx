@@ -12,11 +12,11 @@ type NavItem = {
 };
 
 const nav: NavItem[] = [
-  { label: "Home",       href: "/",         sectionId: "__home__" },
-  { label: "Services",   href: "/#services", sectionId: "services" },
-  { label: "About",      href: "/#about",    sectionId: "about"    },
-  { label: "Calculator", href: "/#contact",  sectionId: "contact"  },
-  { label: "Locations",  href: "/locations"                         },
+  { label: "Home", href: "/", sectionId: "__home__" },
+  { label: "Services", href: "/#services", sectionId: "services" },
+  { label: "About", href: "/#about", sectionId: "about" },
+  { label: "Calculator", href: "/#contact", sectionId: "contact" },
+  { label: "Locations", href: "/locations" },
 ];
 
 // DOM order of tracked sections (must match page layout order)

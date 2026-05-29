@@ -12,8 +12,7 @@ export const metadata: Metadata = {
     default: "Elevate Roofing Services",
     template: "%s | Elevate Roofing Services",
   },
-  description:
-    "Premium roofing across Los Angeles County and Orange County.",
+  description: "Premium roofing across Los Angeles County and Orange County.",
   icons: {
     icon: [{ url: "/favicon.ico", sizes: "any", type: "image/x-icon" }],
     shortcut: ["/favicon.ico"],
@@ -27,20 +26,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap"

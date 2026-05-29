@@ -48,10 +48,10 @@
   --primary-foreground: oklch(0.985 0.005 240);
   --primary-soft: oklch(0.93 0.04 235);
 
-  --background: oklch(0.985 0.008 80);          /* warm off-white */
+  --background: oklch(0.985 0.008 80); /* warm off-white */
   --foreground: oklch(0.18 0.03 240);
-  --surface: oklch(0.97 0.012 75);              /* page band tint */
-  --surface-tint: oklch(0.94 0.03 235);         /* soft blue tint card bg */
+  --surface: oklch(0.97 0.012 75); /* page band tint */
+  --surface-tint: oklch(0.94 0.03 235); /* soft blue tint card bg */
 
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.03 240);
@@ -86,15 +86,22 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
   }
@@ -136,14 +143,19 @@
   }
 }
 
-
 @layer utilities {
-  .text-balance { text-wrap: balance; }
+  .text-balance {
+    text-wrap: balance;
+  }
   .bg-brand-gradient {
     background-image: linear-gradient(135deg, var(--primary) 0%, oklch(0.32 0.09 245) 100%);
   }
   .bg-soft-radial {
-    background-image: radial-gradient(80% 60% at 50% 0%, var(--surface-tint) 0%, var(--background) 70%);
+    background-image: radial-gradient(
+      80% 60% at 50% 0%,
+      var(--surface-tint) 0%,
+      var(--background) 70%
+    );
   }
 
   /* Logo entrance: crisp fade-in + subtle scale, then a single shimmer glint */
@@ -158,7 +170,7 @@
     border-radius: 6px;
     overflow: hidden;
     -webkit-mask-image: linear-gradient(#000, #000);
-            mask-image: linear-gradient(#000, #000);
+    mask-image: linear-gradient(#000, #000);
   }
   .logo-shimmer::after {
     content: "";
@@ -179,18 +191,41 @@
     animation: logo-glint 2.4s ease-out 700ms 1 forwards;
   }
   @keyframes logo-reveal {
-    0%   { opacity: 0; transform: translateY(4px) scale(0.96); filter: blur(4px); }
-    60%  { opacity: 1; filter: blur(0); }
-    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    0% {
+      opacity: 0;
+      transform: translateY(4px) scale(0.96);
+      filter: blur(4px);
+    }
+    60% {
+      opacity: 1;
+      filter: blur(0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
   }
   @keyframes logo-glint {
-    0%   { left: -60%; opacity: 0; }
-    20%  { opacity: 1; }
-    100% { left: 130%; opacity: 0; }
+    0% {
+      left: -60%;
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    100% {
+      left: 130%;
+      opacity: 0;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
-    .logo-reveal { animation: none; }
-    .logo-shimmer::after { animation: none; display: none; }
+    .logo-reveal {
+      animation: none;
+    }
+    .logo-shimmer::after {
+      animation: none;
+      display: none;
+    }
   }
 }
-

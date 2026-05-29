@@ -8,8 +8,8 @@ export function Footer() {
         <div className="space-y-4">
           <Logo variant="footer" />
           <p className="max-w-xs text-sm text-muted-foreground">
-            Your trusted roofing partner across Los Angeles County and Orange
-            County. Licensed, insured, and committed to excellence.
+            Your trusted roofing partner across Los Angeles County and Orange County. Licensed,
+            insured, and committed to excellence.
           </p>
         </div>
         <div>
@@ -43,9 +43,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h4 className="mb-3 text-sm font-semibold text-foreground">
-            Support
-          </h4>
+          <h4 className="mb-3 text-sm font-semibold text-foreground">Support</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li>Help</li>
             <li>FAQ</li>

@@ -36,7 +36,12 @@ const serviceMult: Record<Service, number> = {
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(80),
-  phone: z.string().trim().min(7, "Enter a valid phone").max(20).regex(/^[0-9+\-()\s]+$/, "Digits only"),
+  phone: z
+    .string()
+    .trim()
+    .min(7, "Enter a valid phone")
+    .max(20)
+    .regex(/^[0-9+\-()\s]+$/, "Digits only"),
   email: z.string().trim().email("Enter a valid email").max(120),
 });
 
@@ -61,8 +66,13 @@ export function RoofingEstimator({ locationName }: Props) {
     if (!service || !material || !timeline) return null;
     if (service === "inspection") return { low: 0, high: 0, free: true };
     const base = materialOptions.find((m) => m.id === material)!.pricePerSqft;
-    const mid = base * size * serviceMult[service] * timelineOptions.find((t) => t.id === timeline)!.mult;
-    return { low: Math.round((mid * 0.85) / 100) * 100, high: Math.round((mid * 1.15) / 100) * 100, free: false };
+    const mid =
+      base * size * serviceMult[service] * timelineOptions.find((t) => t.id === timeline)!.mult;
+    return {
+      low: Math.round((mid * 0.85) / 100) * 100,
+      high: Math.round((mid * 1.15) / 100) * 100,
+      free: false,
+    };
   }, [service, material, size, timeline]);
 
   const canNext =
@@ -88,11 +98,12 @@ export function RoofingEstimator({ locationName }: Props) {
 
   return (
     <div className="mx-auto w-full max-w-2xl bg-card p-6 md:p-10">
-
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Instant Estimate</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+            Instant Estimate
+          </p>
           <h3 className="mt-1 text-2xl font-bold text-foreground">Get Your Roofing Quote</h3>
         </div>
         {!submitted && (
@@ -159,7 +170,9 @@ export function RoofingEstimator({ locationName }: Props) {
                   }`}
                 >
                   <span className="text-sm font-semibold text-foreground">{o.label}</span>
-                  <span className="text-xs text-muted-foreground">from {usd(o.pricePerSqft)}/sqft</span>
+                  <span className="text-xs text-muted-foreground">
+                    from {usd(o.pricePerSqft)}/sqft
+                  </span>
                 </button>
               ))}
             </div>
@@ -170,9 +183,13 @@ export function RoofingEstimator({ locationName }: Props) {
         {step === 3 && (
           <div>
             <p className="text-sm font-semibold text-foreground">Approximate roof size</p>
-            <p className="text-xs text-muted-foreground">Drag to estimate — most homes are 1,500–2,500 sqft.</p>
+            <p className="text-xs text-muted-foreground">
+              Drag to estimate — most homes are 1,500–2,500 sqft.
+            </p>
             <div className="mt-6 text-center">
-              <span className="text-5xl font-black tracking-tight text-primary">{size.toLocaleString()}</span>
+              <span className="text-5xl font-black tracking-tight text-primary">
+                {size.toLocaleString()}
+              </span>
               <span className="ml-1 text-sm font-semibold text-muted-foreground">sqft</span>
             </div>
             <input
@@ -186,7 +203,9 @@ export function RoofingEstimator({ locationName }: Props) {
               className="mt-6 w-full accent-[color:var(--primary)] cursor-pointer transition-opacity duration-200 hover:opacity-90 [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:duration-200 [&::-webkit-slider-thumb]:hover:scale-125"
             />
             <div className="mt-1 flex justify-between text-[10px] uppercase tracking-wider text-muted-foreground">
-              <span>500</span><span>2,500</span><span>5,000</span>
+              <span>500</span>
+              <span>2,500</span>
+              <span>5,000</span>
             </div>
           </div>
         )}
@@ -262,7 +281,9 @@ export function RoofingEstimator({ locationName }: Props) {
                     onChange={(e) => setContact({ ...contact, phone: e.target.value })}
                     maxLength={20}
                   />
-                  {errors.phone && <p className="mt-1 px-2 text-xs text-destructive">{errors.phone}</p>}
+                  {errors.phone && (
+                    <p className="mt-1 px-2 text-xs text-destructive">{errors.phone}</p>
+                  )}
                 </div>
                 <div>
                   <input
@@ -274,7 +295,9 @@ export function RoofingEstimator({ locationName }: Props) {
                     onChange={(e) => setContact({ ...contact, email: e.target.value })}
                     maxLength={120}
                   />
-                  {errors.email && <p className="mt-1 px-2 text-xs text-destructive">{errors.email}</p>}
+                  {errors.email && (
+                    <p className="mt-1 px-2 text-xs text-destructive">{errors.email}</p>
+                  )}
                 </div>
               </div>
               <button
@@ -291,13 +314,24 @@ export function RoofingEstimator({ locationName }: Props) {
         {submitted && (
           <div className="grid place-items-center py-10 text-center">
             <div className="grid h-14 w-14 place-items-center rounded-full bg-primary text-primary-foreground">
-              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M20 6 9 17l-5-5" />
               </svg>
             </div>
-            <h4 className="mt-4 text-xl font-bold text-foreground">Thanks, {contact.name.split(" ")[0]}!</h4>
+            <h4 className="mt-4 text-xl font-bold text-foreground">
+              Thanks, {contact.name.split(" ")[0]}!
+            </h4>
             <p className="mt-1 max-w-sm text-sm text-muted-foreground">
-              A licensed Elevate Roofing specialist will call you within one business hour to confirm your free on-site inspection.
+              A licensed Elevate Roofing specialist will call you within one business hour to
+              confirm your free on-site inspection.
             </p>
           </div>
         )}

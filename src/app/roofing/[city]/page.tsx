@@ -17,10 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!c) return {};
 
   const title = `${c.name} Roofing Services | Elevate Roofing`;
-  const desc = `Roof installation, repair & replacement in ${c.name}. ${c.blurb}`.slice(
-    0,
-    160,
-  );
+  const desc = `Roof installation, repair & replacement in ${c.name}. ${c.blurb}`.slice(0, 160);
 
   return {
     title,

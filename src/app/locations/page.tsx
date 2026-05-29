@@ -35,8 +35,7 @@ export default function LocationsPage() {
           <span className="text-primary/70">LA &amp; Orange County</span>
         </h1>
         <p className="mt-4 max-w-2xl text-muted-foreground">
-          Same-day inspections and licensed crews serving every neighborhood
-          below.
+          Same-day inspections and licensed crews serving every neighborhood below.
         </p>
       </section>
 
@@ -45,9 +44,7 @@ export default function LocationsPage() {
         { title: "Orange County", list: oc },
       ].map((group) => (
         <section key={group.title} className="mx-auto max-w-7xl px-6 pb-16">
-          <h2 className="mb-6 text-2xl font-bold text-foreground">
-            {group.title}
-          </h2>
+          <h2 className="mb-6 text-2xl font-bold text-foreground">{group.title}</h2>
           <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {group.list.map((c) => (
               <Link
@@ -58,9 +55,7 @@ export default function LocationsPage() {
                 <p className="text-base font-semibold text-foreground group-hover:text-primary">
                   Roofing in {c.name}
                 </p>
-                <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">
-                  {c.blurb}
-                </p>
+                <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{c.blurb}</p>
               </Link>
             ))}
           </div>
