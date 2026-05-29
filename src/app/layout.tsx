@@ -14,6 +14,10 @@ export const metadata: Metadata = {
   },
   description:
     "Premium roofing across Los Angeles County and Orange County.",
+  icons: {
+    icon: [{ url: "/favicon.ico", sizes: "any", type: "image/x-icon" }],
+    shortcut: ["/favicon.ico"],
+  },
   openGraph: {
     siteName: "Elevate Roofing Services",
     type: "website",
