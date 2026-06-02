@@ -3,20 +3,22 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Menu, X, Home, Wrench, Info, Calculator, MapPin, ChevronRight } from "lucide-react";
 import { Logo } from "./Logo";
 
 type NavItem = {
   label: string;
   href: string;
   sectionId?: string;
+  icon?: React.ElementType;
 };
 
 const nav: NavItem[] = [
-  { label: "Home", href: "/", sectionId: "__home__" },
-  { label: "Services", href: "/#services", sectionId: "services" },
-  { label: "About", href: "/#about", sectionId: "about" },
-  { label: "Calculator", href: "/#contact", sectionId: "contact" },
-  { label: "Locations", href: "/locations" },
+  { label: "Home", href: "/", sectionId: "__home__", icon: Home },
+  { label: "Services", href: "/#services", sectionId: "services", icon: Wrench },
+  { label: "About", href: "/#about", sectionId: "about", icon: Info },
+  { label: "Calculator", href: "/#contact", sectionId: "contact", icon: Calculator },
+  { label: "Locations", href: "/locations", icon: MapPin },
 ];
 
 // DOM order of tracked sections (must match page layout order)
@@ -25,11 +27,24 @@ const SECTION_IDS = ["services", "about", "contact"];
 export function Header() {
   const pathname = usePathname();
   const [activeSection, setActiveSection] = useState<string>("__home__");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isScrollingClickRef = useRef(false);
   const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // Remembers the last section that was active so we don't snap back to
   // "Home" when the user is scrolling through gaps between sections.
   const lastSectionRef = useRef<string>("__home__");
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   // Sync from URL hash and clicks
   useEffect(() => {
@@ -145,7 +160,8 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
+    <>
+      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Logo />
 
@@ -188,7 +204,103 @@ export function Header() {
         >
           Contact Us
         </Link>
+
+        {/* Hamburger Menu Trigger for Mobile */}
+        <button
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-foreground hover:bg-secondary md:hidden"
+          onClick={() => setIsMenuOpen(true)}
+          aria-label="Open menu"
+        >
+          <Menu className="h-5 w-5" />
+        </button>
       </div>
     </header>
+
+      {/* Mobile Menu Overlay Background */}
+      <div 
+        className={`fixed inset-0 z-50 bg-background/80 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
+          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setIsMenuOpen(false)}
+      />
+
+      {/* Mobile Menu Panel - Full-Screen Slide-Out from Right */}
+      <div
+        className={`fixed inset-y-0 right-0 z-50 flex w-full sm:max-w-sm flex-col bg-card px-6 py-6 shadow-2xl transition-transform duration-500 ease-out md:hidden ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex items-center justify-between">
+          <Logo />
+          <button
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-foreground transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary"
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <nav className="mt-10 flex flex-1 flex-col gap-3 overflow-y-auto">
+          {nav.map((item) => {
+            const Icon = item.icon;
+            
+            let isActive = false;
+            if (item.href === "/locations") {
+              isActive = pathname.startsWith("/locations");
+            } else if (pathname === "/" || pathname.startsWith("/roofing/")) {
+              isActive = item.sectionId === activeSection;
+            }
+
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`group flex items-center justify-between rounded-2xl px-4 py-4 text-lg font-medium transition-all ${
+                  isActive
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                }`}
+                onClick={(e) => {
+                  handleNavClick(e, item);
+                  setIsMenuOpen(false);
+                }}
+              >
+                <div className="flex items-center gap-4">
+                  {Icon && (
+                    <span className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
+                      isActive 
+                        ? "bg-primary/20 text-primary" 
+                        : "bg-secondary text-muted-foreground group-hover:bg-background group-hover:text-foreground group-hover:shadow-sm"
+                    }`}>
+                      <Icon className="h-5 w-5" />
+                    </span>
+                  )}
+                  {item.label}
+                </div>
+                <ChevronRight className={`h-5 w-5 transition-transform ${
+                  isActive 
+                    ? "text-primary" 
+                    : "text-muted-foreground/50 group-hover:translate-x-1 group-hover:text-foreground"
+                }`} />
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="mt-auto pt-6 pb-8">
+          <Link
+            href="/#contact"
+            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-4 text-lg font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:shadow-primary/40 active:scale-[0.98]"
+            onClick={(e) => {
+              handleNavClick(e, { label: "Get a Quote", href: "/#contact", sectionId: "contact" });
+              setIsMenuOpen(false);
+            }}
+          >
+            Get a Quote
+          </Link>
+        </div>
+      </div>
+    </>
   );
 }
