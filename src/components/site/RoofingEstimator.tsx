@@ -61,6 +61,8 @@ export function RoofingEstimator({ locationName }: Props) {
   const [contact, setContact] = useState({ name: "", phone: "", email: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const estimate = useMemo(() => {
     if (!service || !material || !timeline) return null;
@@ -81,8 +83,10 @@ export function RoofingEstimator({ locationName }: Props) {
     (step === 3 && size > 0) ||
     (step === 4 && !!timeline);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // 1. Validate contact fields
     const res = contactSchema.safeParse(contact);
     if (!res.success) {
       const fieldErrors: Record<string, string> = {};
@@ -91,7 +95,61 @@ export function RoofingEstimator({ locationName }: Props) {
       return;
     }
     setErrors({});
-    setSubmitted(true);
+    setSubmitError(null);
+    setIsLoading(true);
+
+    // 2. Build human-readable raw values
+    const serviceLabel = serviceOptions.find((o) => o.id === service!)?.label ?? service!;
+    const materialLabel = materialOptions.find((o) => o.id === material!)?.label ?? material!;
+    const timelineLabel = timelineOptions.find((o) => o.id === timeline!)?.label ?? timeline!;
+    const timelineDesc = timelineOptions.find((o) => o.id === timeline!)?.desc ?? "";
+    const budgetLine = estimate?.free
+      ? "Free Inspection"
+      : `${usd(estimate!.low)} - ${usd(estimate!.high)}`;
+
+    // 3. Build the clean JSON payload for Web3Forms (strictly raw data only, no HTML/JSX)
+    const payload: Record<string, string | number> = {
+      access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY!,
+      subject: `New Roofing Lead - ${contact.name}${locationName ? ` (${locationName})` : ""}`,
+      from_name: "Elevate Roofing Estimator",
+      name: contact.name,
+      phone: contact.phone,
+      email: contact.email,
+      service: serviceLabel,
+      material: materialLabel,
+      roof_size_sqft: size,
+      timeline: `${timelineLabel} (${timelineDesc})`,
+      estimated_budget: budgetLine,
+    };
+
+    if (locationName) {
+      payload["location"] = locationName;
+    }
+
+    // 4. Post to Web3Forms
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message ?? "Submission failed. Please try again.");
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again or call us directly.",
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const totalSteps = 4;
@@ -300,11 +358,35 @@ export function RoofingEstimator({ locationName }: Props) {
                   )}
                 </div>
               </div>
+
+              {/* API submission error */}
+              {submitError && (
+                <p className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-xs text-destructive">
+                  ⚠️ {submitError}
+                </p>
+              )}
+
               <button
                 type="submit"
-                className="w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:shadow-md hover:bg-primary/95"
+                disabled={isLoading}
+                className="relative w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:shadow-md hover:bg-primary/95 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Send My Quote
+                {isLoading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg
+                      className="h-4 w-4 animate-spin"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                    </svg>
+                    Sending…
+                  </span>
+                ) : (
+                  "Send My Quote"
+                )}
               </button>
             </form>
           </div>

@@ -45,7 +45,7 @@ export function Footer() {
         <div>
           <h4 className="mb-3 text-sm font-semibold text-foreground">Support</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>Help</li>
+            <li></li>
             <li>FAQ</li>
             <li>
               <a href="tel:+15624692089">1 (562) 469 2089</a>
