@@ -3,7 +3,7 @@ import { Header } from "@/components/site/Header";
 import { RoofingEstimator } from "@/components/site/RoofingEstimator";
 
 import { Footer } from "@/components/site/Footer";
-import hero from "@/assets/hero-roofing.jpg";
+import hero from "@/assets/hero-roofing.jpeg";
 import home from "@/assets/home-exterior.jpg";
 import inspecting from "@/assets/roofer-inspecting.jpg";
 import installation from "@/assets/new-installation.jpg";
