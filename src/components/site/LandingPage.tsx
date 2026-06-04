@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Header } from "@/components/site/Header";
 import { RoofingEstimator } from "@/components/site/RoofingEstimator";
+import { ProjectShowcase } from "@/components/site/ProjectShowcase";
 
 import { Footer } from "@/components/site/Footer";
 import hero from "@/assets/hero-roofing.jpeg";
@@ -11,6 +12,7 @@ import repair from "@/assets/roof-repair.jpg";
 import replacement from "@/assets/roof-replacement.jpg";
 import portrait from "@/assets/contractor-portrait.jpg";
 import team from "@/assets/team-working.jpg";
+
 
 interface LandingPageProps {
   locationName?: string;
@@ -49,6 +51,7 @@ const process = [
   },
   { n: "04", title: "Final Inspection", desc: "Thorough inspection and complete cleanup." },
 ];
+
 
 const testimonials = [
   {
@@ -325,6 +328,11 @@ export function LandingPage({ locationName, countyName }: LandingPageProps) {
           </p>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════════
+          PROJECT SHOWCASE — Before / During / After timeline
+         ═══════════════════════════════════════════════════════════ */}
+      <ProjectShowcase />
 
       {/* Section 5 — Mission/Vision/Value */}
       <section className="mx-auto max-w-7xl px-6 pb-20">
