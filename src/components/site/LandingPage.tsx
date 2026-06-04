@@ -291,9 +291,11 @@ export function LandingPage({ locationName, countyName }: LandingPageProps) {
           </div>
 
           {services.map((s) => (
-            <article
+            <a
               key={s.title}
-              className="group overflow-hidden rounded-3xl bg-card shadow-sm ring-1 ring-border transition hover:-translate-y-1 hover:shadow-lg"
+              href="#showcase"
+              aria-label={`${s.title} — view project showcase`}
+              className="group block overflow-hidden rounded-3xl bg-card shadow-sm ring-1 ring-border transition hover:-translate-y-1 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <div className="p-5">
                 <h3 className="text-lg font-bold text-foreground">{s.title}</h3>
@@ -308,11 +310,11 @@ export function LandingPage({ locationName, countyName }: LandingPageProps) {
                   loading="lazy"
                   className="h-44 w-full object-cover"
                 />
-                <span className="absolute bottom-3 right-3 grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground shadow">
+                <span className="absolute bottom-3 right-3 grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground shadow transition group-hover:scale-110">
                   →
                 </span>
               </div>
-            </article>
+            </a>
           ))}
         </div>
       </section>
