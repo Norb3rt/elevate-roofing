@@ -248,4 +248,65 @@
       display: none;
     }
   }
+
+  /* ── Reviews section utilities ── */
+  .review-trust-badge {
+    transition: box-shadow 0.25s ease;
+  }
+  .review-trust-badge:hover {
+    box-shadow:
+      0 8px 24px -8px oklch(0 0 0 / 8%),
+      0 2px 6px -1px oklch(0 0 0 / 4%);
+  }
+
+  .review-card {
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  .review-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow:
+      0 20px 40px -12px oklch(0.388 0.085 240 / 12%),
+      0 4px 12px -2px oklch(0 0 0 / 6%);
+  }
+
+  .review-cta {
+    position: relative;
+    overflow: hidden;
+  }
+  .review-cta::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 40%;
+    height: 200%;
+    background: linear-gradient(
+      105deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 60%,
+      transparent 100%
+    );
+    transform: skewX(-15deg);
+    animation: cta-shimmer 4s ease-in-out 1s infinite;
+  }
+  @keyframes cta-shimmer {
+    0%,
+    100% {
+      left: -60%;
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    40% {
+      left: 130%;
+      opacity: 0;
+    }
+    41% {
+      left: -60%;
+      opacity: 0;
+    }
+  }
 }

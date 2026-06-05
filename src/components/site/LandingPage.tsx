@@ -4,6 +4,7 @@ import { RoofingEstimator } from "@/components/site/RoofingEstimator";
 import { ProjectShowcase } from "@/components/site/ProjectShowcase";
 
 import { Footer } from "@/components/site/Footer";
+import { ReviewsSection } from "@/components/site/ReviewsSection";
 import hero from "@/assets/hero-roofing.jpeg";
 import home from "@/assets/home-exterior.jpg";
 import inspecting from "@/assets/roofer-inspecting.jpg";
@@ -53,29 +54,6 @@ const process = [
 ];
 
 
-const testimonials = [
-  {
-    name: "Sarah Johnson",
-    city: "Pasadena, CA",
-    quote:
-      "Outstanding service! Our new roof looks amazing, and the team was professional from start to finish.",
-    rating: "4.9",
-  },
-  {
-    name: "Mike Rodriguez",
-    city: "Long Beach, CA",
-    quote:
-      "Quick response after storm damage. The repair was perfect, and communication was excellent.",
-    rating: "4.9",
-  },
-  {
-    name: "Jennifer Chen",
-    city: "Irvine, CA",
-    quote:
-      "Our roof replacement exceeded expectations. Great quality and fair pricing — perfect and professional.",
-    rating: "5.0",
-  },
-];
 
 export function LandingPage({ locationName, countyName }: LandingPageProps) {
   const where = locationName ? `in ${locationName}` : "across Los Angeles & Orange County";
@@ -440,35 +418,7 @@ export function LandingPage({ locationName, countyName }: LandingPageProps) {
       </section>
 
       {/* Section 7 — Testimonials */}
-      <section id="testimonials" className="mx-auto max-w-7xl px-6 pb-20 scroll-mt-24">
-        <h2 className="text-center text-4xl font-bold text-foreground md:text-5xl">
-          Clients Speak for Us
-        </h2>
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {testimonials.map((t) => (
-            <figure key={t.name} className="overflow-hidden rounded-3xl bg-card ring-1 ring-border">
-              <img
-                src={team.src}
-                alt={t.name}
-                width={1024}
-                height={896}
-                loading="lazy"
-                className="h-56 w-full object-cover"
-              />
-              <figcaption className="space-y-3 p-5">
-                <blockquote className="text-sm text-foreground">&ldquo;{t.quote}&rdquo;</blockquote>
-                <div className="flex items-center justify-between text-xs">
-                  <div>
-                    <p className="font-semibold text-foreground">{t.name}</p>
-                    <p className="text-muted-foreground">{t.city}</p>
-                  </div>
-                  <p className="font-semibold text-primary">★ {t.rating}</p>
-                </div>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
+      <ReviewsSection />
 
       {/* Section 8 — Contact */}
       <section id="contact" className="mx-auto max-w-4xl px-6 pb-20 scroll-mt-24">
