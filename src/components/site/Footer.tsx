@@ -60,8 +60,16 @@ export function Footer() {
         <div>
           <h4 className="mb-3 text-sm font-semibold text-foreground">Legal</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>Privacy Policy</li>
-            <li>Terms of Service</li>
+            <li>
+              <Link href="/privacy-policy" className="hover:text-foreground">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/terms-of-service" className="hover:text-foreground">
+                Terms of Service
+              </Link>
+            </li>
             <li>License #1098221</li>
           </ul>
         </div>

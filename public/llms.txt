@@ -1,15 +1,40 @@
 # Elevate Roofing Services
 
-> Licensed roofing contractor serving Los Angeles and Orange County — installation, repair, and replacement with free estimates.
+> Licensed roofing contractor serving Los Angeles County and Orange County, California — roof installation, repair, replacement, and emergency response with free estimates.
 
-Elevate Roofing Services delivers premium residential and commercial roofing across Southern California. We specialize in asphalt shingle, clay/concrete tile, standing seam metal, and flat/TPO systems, with rapid storm response and HOA-compliant installations.
+Elevate Roofing Services delivers premium residential and commercial roofing across Southern California. Specializations include asphalt shingle, clay/concrete tile, standing seam metal, and flat/TPO systems, with rapid storm response and HOA-compliant installations. California C-39 Roofing Contractor License #1098221. Phone: (562) 469-2089.
 
 ## Pages
 
-- [Home](/): Overview of services, instant roofing estimator, and customer testimonials.
-- [Locations](/locations): Full list of cities served across Los Angeles and Orange County.
+- [Home](/): Full landing page with hero, services overview, project showcase, estimator, and customer reviews.
+- [Locations](/locations): Full directory of cities served across Los Angeles County and Orange County.
+- [FAQ](/faq): Frequently asked questions about roofing materials, inspections, repairs, maintenance, and contractor selection.
+- [Privacy Policy](/privacy-policy): Data collection, usage, retention, cookies, CCPA/CalOPPA rights, and contact information for privacy requests.
+- [Terms of Service](/terms-of-service): Legally binding terms covering service scope, estimates, payment, permits, client responsibilities, liability, warranties, cancellation, and dispute resolution.
+
+## Home page sections
+
+The home page (`/`) is composed of the following named sections in order:
+
+- **Hero** (`/`): Full-bleed image hero with headline, CTA buttons (free estimate, call now), and optional city name overlay for location variants.
+- **Primary Home** (`/`): Value proposition with pricing starting point ($6,000), instant estimate CTA card, and link to customer reviews.
+- **Services** (`/#services`): Three service cards (New Roof Installation, Expert Roof Repair, Full Roof Replacement) plus a contact phone CTA tile.
+- **About** (`/#about`): Brand quote band with mission, vision, and value expandable accordion panels alongside team imagery.
+- **Project Showcase** (`/#showcase`): Before/during/after photo timeline for real completed projects. Each project has three step cards with images and descriptions. Cards open a full-screen lightbox on click. New projects are added by importing images and appending to the `showcaseProjects` array in `ProjectShowcase.tsx`.
+- **Process** (`/`): Four-step numbered process cards (Free Consultation → Detailed Plan → Expert Installation → Final Inspection).
+- **Testimonials** (`/#testimonials`): Customer reviews section with star ratings and trust badges.
+- **Contact / Estimator** (`/#contact`): Interactive roofing cost estimator form embedded in a card.
+
+## Legal pages
+
+Legal pages share a consistent layout: breadcrumb navigation (Home → Legal → Page), introductory trust header with effective date, and fully sectioned article content using semantic HTML (`<article>`, `<section>`, `<address>`, `aria-labelledby`). All content is hardcoded as JSX — no runtime markdown parsing.
+
+- [Privacy Policy](/privacy-policy): 11 sections covering introduction, information collected, usage, sharing, retention, cookies, CCPA rights, security, third-party links, contact, and policy changes. Effective Date: June 5, 2026.
+- [Terms of Service](/terms-of-service): 15 sections covering agreement, services, estimates, payment, permits, client responsibilities, liability, warranty, cancellation, disputes, indemnification, website use, disclaimer, changes, and contact. Effective Date: June 5, 2026.
 
 ## Service areas
+
+Dynamic city pages are generated at build time from `src/data/cities.ts` (120+ cities). Each city page reuses the full `LandingPage` component with a city-specific `locationName` and `countyName` prop. Representative cities:
 
 - [Los Angeles](/roofing/los-angeles): Roofing services in Los Angeles.
 - [Long Beach](/roofing/long-beach): Coastal roofing for Long Beach homes.
@@ -19,3 +44,35 @@ Elevate Roofing Services delivers premium residential and commercial roofing acr
 - [Anaheim](/roofing/anaheim): Residential and commercial roofing in Anaheim.
 - [Newport Beach](/roofing/newport-beach): Estate-quality tile and slate roofing in Newport Beach.
 - [Malibu](/roofing/malibu): Class A fire-resistant roofing in Malibu.
+
+## Architecture
+
+**Framework:** Next.js 16 (App Router, TypeScript, React 19). All pages are statically rendered at build time.
+
+**Styling:** Tailwind CSS v4 with a custom OKLCH design token system defined in `src/styles.css`. Brand primary color: `oklch(0.388 0.085 240)` (~#004D77). Typography: Plus Jakarta Sans (display/headings) + Inter (body) via Google Fonts.
+
+**UI components:** shadcn/ui (New York style) for accordion, dialog, and form primitives. Lucide React for icons.
+
+**Site components** (`src/components/site/`):
+
+- `Header.tsx` — Sticky navigation with scroll-spy active state, smooth-scroll section links, mobile slide-out menu panel.
+- `Footer.tsx` — Four-column grid (brand, pages, support, legal) with social icon links (TikTok, Instagram, Facebook, X) and oversized wordmark.
+- `LandingPage.tsx` — Shared page template used by `/` and all `/roofing/[city]` pages. Accepts optional `locationName` and `countyName` props to personalize copy.
+- `ProjectShowcase.tsx` — Client component. Before/during/after three-step image grid with lightbox overlay. Project data lives in the `showcaseProjects` array at the top of the file.
+- `ReviewsSection.tsx` — Customer testimonials with star ratings and trust badges.
+- `RoofingEstimator.tsx` — Interactive cost estimator form (client component).
+- `Logo.tsx` — Brand logo with shimmer animation variant.
+
+**Data** (`src/data/`):
+
+- `cities.ts` — Array of 120+ city objects with `name`, `slug`, `county`, and SEO metadata used to generate all `/roofing/[city]` static pages.
+
+**Key routes:**
+
+- `/` — Home (static)
+- `/locations` — City directory (static)
+- `/faq` — FAQ accordion page (static)
+- `/privacy-policy` — Privacy Policy (static)
+- `/terms-of-service` — Terms of Service (static)
+- `/roofing/[city]` — Dynamic city pages (SSG via `generateStaticParams`)
+- `/sitemap.xml` — Auto-generated sitemap including all static and city pages

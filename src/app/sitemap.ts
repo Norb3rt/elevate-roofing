@@ -15,6 +15,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1.0,
     },
+    {
+      url: `${BASE_URL}/privacy-policy`,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/terms-of-service`,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
   ];
 
   const cityPages: MetadataRoute.Sitemap = cities.map((c) => ({
