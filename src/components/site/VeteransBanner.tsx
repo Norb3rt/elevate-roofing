@@ -11,7 +11,7 @@ const DISCOUNT_VALUE = "10% OFF";
 const HEADLINE = "Veterans Save 10%";
 const SUBHEADLINE = "Thank you for your service.";
 const BODY_COPY =
-  "As a small token of our gratitude, all active-duty military, veterans, and their families receive an exclusive 10% discount on any roofing service. Quality protection for those who protected us.";
+  "As a small token of our gratitude, all active-duty military and veterans receive an exclusive 10% discount on any roofing service. Quality protection for those who protected us.";
 const CTA_LABEL = "Claim Discount";
 const CTA_HREF = "#contact";
 
