@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Header } from "@/components/site/Header";
 import { RoofingEstimator } from "@/components/site/RoofingEstimator";
 import { ProjectShowcase } from "@/components/site/ProjectShowcase";
+import { VeteransBanner } from "@/components/site/VeteransBanner";
 
 import { Footer } from "@/components/site/Footer";
 import { ReviewsSection } from "@/components/site/ReviewsSection";
@@ -57,7 +58,7 @@ const process = [
 
 export function LandingPage({ locationName, countyName }: LandingPageProps) {
   const where = locationName ? `in ${locationName}` : "across Los Angeles & Orange County";
-  const heroLine = locationName ? locationName.toUpperCase() : "";
+  const heroLine = locationName ? locationName.toUpperCase() : "ELEVATE ROOFING";
 
   return (
     <div className="min-h-screen bg-background">
@@ -119,6 +120,9 @@ export function LandingPage({ locationName, countyName }: LandingPageProps) {
           </div>
         </div>
       </section>
+
+      {/* Veterans Discount Banner */}
+      <VeteransBanner />
 
       {/* Section 2 — Primary Home */}
       <section className="mx-auto max-w-7xl px-6 py-20">

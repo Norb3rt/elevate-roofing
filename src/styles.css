@@ -309,4 +309,86 @@
       opacity: 0;
     }
   }
+
+  /* ── Veterans banner utilities ── */
+  .veterans-card {
+    box-shadow:
+      0 4px 32px -8px oklch(0 0 0 / 6%),
+      0 8px 16px -4px oklch(0 0 0 / 4%),
+      0 1px 3px oklch(0 0 0 / 3%);
+    transition: box-shadow 0.35s ease;
+  }
+  .veterans-card:hover {
+    box-shadow:
+      0 8px 40px -8px oklch(0 0 0 / 9%),
+      0 12px 24px -6px oklch(0 0 0 / 5%),
+      0 1px 3px oklch(0 0 0 / 3%);
+  }
+
+  .veterans-badge {
+    animation: badge-glow 3.5s ease-in-out infinite;
+    will-change: box-shadow;
+  }
+  @keyframes badge-glow {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 oklch(0.388 0.085 240 / 0%);
+    }
+    50% {
+      box-shadow:
+        0 0 16px 4px oklch(0.388 0.085 240 / 14%),
+        0 0 4px 1px oklch(0.388 0.085 240 / 8%);
+    }
+  }
+
+  .veterans-cta {
+    position: relative;
+    overflow: hidden;
+  }
+  .veterans-cta::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 35%;
+    height: 200%;
+    background: linear-gradient(
+      105deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.25) 50%,
+      rgba(255, 255, 255, 0) 60%,
+      transparent 100%
+    );
+    transform: skewX(-15deg);
+    animation: veterans-cta-shimmer 5s ease-in-out 2s infinite;
+  }
+  @keyframes veterans-cta-shimmer {
+    0%,
+    100% {
+      left: -60%;
+      opacity: 0;
+    }
+    8% {
+      opacity: 1;
+    }
+    35% {
+      left: 130%;
+      opacity: 0;
+    }
+    36% {
+      left: -60%;
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .veterans-badge {
+      animation: none;
+    }
+    .veterans-cta::after {
+      animation: none;
+      display: none;
+    }
+  }
 }

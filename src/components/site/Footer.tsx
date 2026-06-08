@@ -70,7 +70,7 @@ export function Footer() {
                 Terms of Service
               </Link>
             </li>
-            <li>License #1098221</li>
+            <li>License #1102586</li>
           </ul>
         </div>
       </div>
