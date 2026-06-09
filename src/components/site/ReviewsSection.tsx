@@ -12,6 +12,7 @@ interface Review {
   date: string;
   quote: string;
   rating: number;
+  url?: string;
 }
 
 const reviews: Review[] = [
@@ -21,6 +22,7 @@ const reviews: Review[] = [
     quote:
       "I had a great experience with Elevate Roofing on my project in Irvine. From start to finish, the team was professional, responsive, and easy to work with. A special shoutout to Jesse, who was incredibly helpful throughout the entire process. He took the time to explain everything clearly, answered all my questions, and made sure the project stayed on track. His attention to detail and commitment to doing things right really stood out. The final result looks great, and I couldn’t be happier. I highly recommend Elevate Roofing and working with Jesse if you’re looking for quality work and excellent service.",
     rating: 5,
+     url: "https://maps.app.goo.gl/dnzYS4Lx37GoidTdA", 
   },
   {
     name: "Lorena Mc Gregor",
@@ -28,6 +30,7 @@ const reviews: Review[] = [
     quote:
       "I couldn’t be happier with my experience! When I found out I needed a full roof replacement, I was nervous about finding a reliable company but I’m so glad I found Elevate Roofing. They were incredible from start to finish. Their craftsmanship was top-quality, and their customer service was just as impressive. They were communicative, professional, and genuinely cared about the work they were doing. Jesse truly knows what he’s doing, and it shows in the final result. I highly recommend Elevate Roofing to anyone who needs roofing work done. They exceeded my expectations in every way.",
     rating: 5,
+     url: "https://maps.app.goo.gl/6sDR1HJaXeGtktTC8", 
   },
   {
     name: "Hammer Logic",
@@ -35,6 +38,7 @@ const reviews: Review[] = [
     quote:
       "We love partnering with Elevate Roofing on our insurance projects. They are our preferred roofer because they’re professional, reliable, and incredibly knowledgeable. Their communication with us and homeowners is always clear and timely, making every project smooth and stress-free. The workmanship is outstanding, and they consistently go above and beyond to ensure every job is completed with excellence. Highly recommend them to anyone looking for a trustworthy and skilled roofing partner!",
     rating: 5,
+    url: "https://maps.app.goo.gl/ffYLoN6XBc5YGX6m9", 
   },
   {
     name: "Melissa Marvelous",
@@ -42,6 +46,7 @@ const reviews: Review[] = [
     quote:
       "Elevate Roofing is a trustworthy and reliable company that consistently delivers high-quality work. They were professional, communicative, and kept us updated throughout the entire process. I highly recommend them to anyone in need of roofing services.",
     rating: 5,
+    url: "https://maps.app.goo.gl/jcZ2Fw45a9gyKMGaA", 
   },
   {
     name: "Edward Arellano",
@@ -49,6 +54,7 @@ const reviews: Review[] = [
     quote:
       "I recently had the pleasure of working with Elevate Roofing, and I couldn't be more impressed with their service! From the initial consultation to the final inspection, their team was professional, efficient, and thorough. They took the time to explain the entire process and answered all of my questions, ensuring I felt confident and informed every step of the way. The quality of their work is outstanding – my new roof looks fantastic, and I know it's built to last. The crew was punctual, respectful of my property, and completed the job on time. I highly recommend Elevate Roofing to anyone in need of reliable, top-notch roofing services. They truly go above and beyond!",
     rating: 5,
+    url: "https://maps.app.goo.gl/NULC5f5pX7toX2xE7", 
   },
   {
     name: "Edgar Ojeda",
@@ -56,6 +62,7 @@ const reviews: Review[] = [
     quote:
       "I had a great experience with Elevate Roofing. They were professional, on time, and did a fantastic job on my roof. Jesse and his team were skilled, and they communicated clearly throughout the process. They really made sure everything was done right, and I felt confident that my roof was in good hands. I’d definitely recommend them for anyone needing roofing work!",
     rating: 5,
+    url: "https://maps.app.goo.gl/QBwvdpXRAnwSaUbo9", 
   },
 ];
 
@@ -205,7 +212,7 @@ function ReviewModal({
 
         {/* View on Google CTA */}
         <a
-          href={GOOGLE_REVIEWS_URL}
+          href={review.url || GOOGLE_REVIEWS_URL} 
           target="_blank"
           rel="noopener noreferrer"
           className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition hover:bg-primary/90"

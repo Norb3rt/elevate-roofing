@@ -5,6 +5,7 @@ import { ProjectShowcase } from "@/components/site/ProjectShowcase";
 import { VeteransBanner } from "@/components/site/VeteransBanner";
 
 import { Footer } from "@/components/site/Footer";
+import { ServiceAreaMap } from "@/components/site/ServiceAreaMap";
 import { ReviewsSection } from "@/components/site/ReviewsSection";
 import hero from "@/assets/hero-roofing.jpeg";
 import home from "@/assets/home-exterior.jpg";
@@ -430,6 +431,9 @@ export function LandingPage({ locationName, countyName }: LandingPageProps) {
           <RoofingEstimator locationName={locationName} />
         </div>
       </section>
+
+      {/* Section 9 — Service Area Map */}
+      {/* {!locationName && <ServiceAreaMap />} */}
 
       <Footer />
     </div>

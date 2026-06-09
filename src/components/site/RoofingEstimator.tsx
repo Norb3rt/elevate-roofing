@@ -15,7 +15,7 @@ const serviceOptions: { id: Service; label: string; desc: string; icon: string }
 ];
 
 const materialOptions: { id: Material; label: string; pricePerSqft: number }[] = [
-  { id: "shingle", label: "Asphalt Shingle", pricePerSqft: 6 },
+  { id: "shingle", label: "Asphalt Shingle", pricePerSqft: 7 },
   { id: "tile", label: "Clay / Concrete Tile", pricePerSqft: 12 },
   { id: "metal", label: "Standing Seam Metal", pricePerSqft: 15 },
   { id: "flat", label: "Flat / TPO", pricePerSqft: 9 },

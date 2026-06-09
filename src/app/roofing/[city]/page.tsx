@@ -49,7 +49,7 @@ export default async function CityPage({ params }: Props) {
       name: city.name,
       containedInPlace: city.county,
     },
-    telephone: "+1-800-555-0199",
+    telephone: "+1-562-469-2089",
     priceRange: "$$",
   };
 
