@@ -1,78 +1,74 @@
 # Elevate Roofing Services
 
-> Licensed roofing contractor serving Los Angeles County and Orange County, California — roof installation, repair, replacement, and emergency response with free estimates.
+> Licensed C-39 roofing contractor serving Los Angeles County and Orange County, California — providing residential and commercial roof installation, repair, replacement, and emergency storm response with free estimates and 10% veteran/military discount.
 
-Elevate Roofing Services delivers premium residential and commercial roofing across Southern California. Specializations include asphalt shingle, clay/concrete tile, standing seam metal, and flat/TPO systems, with rapid storm response and HOA-compliant installations. California C-39 Roofing Contractor License #1098221. Phone: (562) 469-2089.
+Elevate Roofing Services delivers premium residential and commercial roofing solutions across Southern California. Active service areas span all major cities in Los Angeles County and Orange County (122 cities total). Specializations include asphalt shingle, clay/concrete tile, standing seam metal, flat/TPO roofing, rapid storm leak repair, and HOA-compliant installations.
 
-## Pages
+Company Information:
+- Phone: (562) 469-2089
+- Address: Paramount, CA (Physical profile on Google Maps)
+- License: California C-39 Roofing Contractor License #1098221
+- Google Maps CID: https://www.google.com/maps?cid=0xe8d4fd261c481b:0x4a949b36e86814f1
 
-- [Home](/): Full landing page with hero, services overview, project showcase, estimator, and customer reviews.
-- [Locations](/locations): Full directory of cities served across Los Angeles County and Orange County.
-- [FAQ](/faq): Frequently asked questions about roofing materials, inspections, repairs, maintenance, and contractor selection.
-- [Privacy Policy](/privacy-policy): Data collection, usage, retention, cookies, CCPA/CalOPPA rights, and contact information for privacy requests.
-- [Terms of Service](/terms-of-service): Legally binding terms covering service scope, estimates, payment, permits, client responsibilities, liability, warranties, cancellation, and dispute resolution.
+---
 
-## Home page sections
+## Active Production Routes
 
-The home page (`/`) is composed of the following named sections in order:
+The application compiles to 130 static pages:
 
-- **Hero** (`/`): Full-bleed image hero with headline, CTA buttons (free estimate, call now), and optional city name overlay for location variants.
-- **Primary Home** (`/`): Value proposition with pricing starting point ($6,000), instant estimate CTA card, and link to customer reviews.
-- **Services** (`/#services`): Three service cards (New Roof Installation, Expert Roof Repair, Full Roof Replacement) plus a contact phone CTA tile.
-- **About** (`/#about`): Brand quote band with mission, vision, and value expandable accordion panels alongside team imagery.
-- **Project Showcase** (`/#showcase`): Before/during/after photo timeline for real completed projects. Each project has three step cards with images and descriptions. Cards open a full-screen lightbox on click. New projects are added by importing images and appending to the `showcaseProjects` array in `ProjectShowcase.tsx`.
-- **Process** (`/`): Four-step numbered process cards (Free Consultation → Detailed Plan → Expert Installation → Final Inspection).
-- **Testimonials** (`/#testimonials`): Customer reviews section with star ratings and trust badges.
-- **Contact / Estimator** (`/#contact`): Interactive roofing cost estimator form embedded in a card.
+- **Home Page (`/`)**: Main landing page shell containing value propositions, visual service sections, custom interactive pricing estimator, project lightbox timelines, veterans promo banner, Google Maps service area map, and customer reviews. Injects home page LocalBusiness schema.
+- **Locations Directory (`/locations`)**: Directory page listing all 122 cities served, grouped dynamically into Los Angeles County and Orange County grids. Injects ItemList schema of all locations and breadcrumb structured data.
+- **FAQ Page (`/faq`)**: Structured information resource answering 16 core questions on roofing inspections, materials, lifespan, and warranties. Injects FAQPage structured data and breadcrumb schema.
+- **Privacy Policy (`/privacy-policy`)**: Static legal compliance page detailing data collection, cookies, CCPA/CalOPPA rights, and contact channels. Effective Date: June 5, 2026.
+- **Terms of Service (`/terms-of-service`)**: Legal agreement details covering service estimates, payments, liability warranties, and dispute resolution. Effective Date: June 5, 2026.
+- **Programmatic Location Pages (`/roofing/[city]`)**: 122 localized landing pages generated via static site generation (SSG) utilizing Next.js `generateStaticParams`. Dynamically personalizes heading copy, descriptions, regional details, and injects highly precise city-scoped LocalBusiness schemas (geo-coordinates, local offer catalogs, localized reviews).
+- **Sitemap (`/sitemap.xml`)**: Dynamically generated index of all key search-indexable production routes (excludes `/faq`, includes `/`, `/locations`, `/privacy-policy`, `/terms-of-service`, and all 122 programmatic `/roofing/[city]` pages).
+- **Robots Policy (`/robots.txt`)**: Standard directory policy allowing all search engines and crawlers.
 
-## Legal pages
+---
 
-Legal pages share a consistent layout: breadcrumb navigation (Home → Legal → Page), introductory trust header with effective date, and fully sectioned article content using semantic HTML (`<article>`, `<section>`, `<address>`, `aria-labelledby`). All content is hardcoded as JSX — no runtime markdown parsing.
+## Project Structure & Architecture
 
-- [Privacy Policy](/privacy-policy): 11 sections covering introduction, information collected, usage, sharing, retention, cookies, CCPA rights, security, third-party links, contact, and policy changes. Effective Date: June 5, 2026.
-- [Terms of Service](/terms-of-service): 15 sections covering agreement, services, estimates, payment, permits, client responsibilities, liability, warranty, cancellation, disputes, indemnification, website use, disclaimer, changes, and contact. Effective Date: June 5, 2026.
+**Framework**: Next.js 16.2.6 (App Router, TypeScript, React 19). Fully statically generated (SSG) at build time for extreme performance and optimal crawling.
 
-## Service areas
+**Styling**: Tailwind CSS v4.2.1 using `@tailwindcss/postcss` and custom OKLCH design tokens located in `src/styles.css`. Brand primary color: `oklch(0.388 0.085 240)` (~#004D77). Typography features Inter (body text) and Plus Jakarta Sans (headings/accent displays) from Google Fonts.
 
-Dynamic city pages are generated at build time from `src/data/cities.ts` (120+ cities). Each city page reuses the full `LandingPage` component with a city-specific `locationName` and `countyName` prop. Representative cities:
+**UI Primitives**: shadcn/ui components situated in `src/components/ui/` (e.g. Accordion, aspect-ratio, button, dialog, cards, etc.). Lucide React is utilized for layout icons.
 
-- [Los Angeles](/roofing/los-angeles): Roofing services in Los Angeles.
-- [Long Beach](/roofing/long-beach): Coastal roofing for Long Beach homes.
-- [Pasadena](/roofing/pasadena): Roofing for Pasadena's Craftsman and Spanish Revival homes.
-- [Santa Monica](/roofing/santa-monica): Ocean-front durable roofing in Santa Monica.
-- [Irvine](/roofing/irvine): HOA-compliant roofing in Irvine.
-- [Anaheim](/roofing/anaheim): Residential and commercial roofing in Anaheim.
-- [Newport Beach](/roofing/newport-beach): Estate-quality tile and slate roofing in Newport Beach.
-- [Malibu](/roofing/malibu): Class A fire-resistant roofing in Malibu.
+### Site Components (`src/components/site/`)
 
-## Architecture
+- `Header.tsx`: Sticky navigation with responsive mobile slide-out, smooth anchor scrolling, and active scroll-spy intersection observers.
+- `Footer.tsx`: 4-column footer featuring company licensing details, social linkages (TikTok, Instagram, Facebook, X), legal routes, and directory links.
+- `LandingPage.tsx`: The primary landing page template. Configured to accept optional `locationName` and `countyName` properties to personalize site copy.
+- `Logo.tsx`: SVG vector logomark featuring animated gradient shimmer highlights.
+- `ProjectShowcase.tsx`: Photo grid component presenting before/during/after steps for roofing projects, integrated with a full-screen image lightbox.
+- `ReviewsSection.tsx`: Customer feedback carousel displaying 6 authentic customer testimonials complete with Google Review link parameters, ratings, dates, and localized reviews details.
+- `RoofingEstimator.tsx`: Cost estimation calculator allowing users to estimate roof repairs and replacements based on roof size, materials, slope, and structural layers.
+- `ServiceAreaMap.tsx`: Responsive map container embedding the physical Google Maps iframe and displaying prominent local service area badges (LA, Irvine, Anaheim, etc.).
+- `VeteransBanner.tsx`: Marketing discount card providing veterans and active military members a 10% discount on roofing services.
 
-**Framework:** Next.js 16 (App Router, TypeScript, React 19). All pages are statically rendered at build time.
+### Data Layer (`src/data/`)
 
-**Styling:** Tailwind CSS v4 with a custom OKLCH design token system defined in `src/styles.css`. Brand primary color: `oklch(0.388 0.085 240)` (~#004D77). Typography: Plus Jakarta Sans (display/headings) + Inter (body) via Google Fonts.
+- `cities.ts`: Primary data source declaring the schema interface `City` (`slug`, `name`, `county`, `lat`, `lng`, `zip?`, `blurb`) and exporting an array of 122 validated cities (88 Los Angeles County, 34 Orange County). Includes the `findCity(slug)` lookup utility.
+- `cities.md`: Documentation detailing the location database, metadata structures, and geolocation properties.
 
-**UI components:** shadcn/ui (New York style) for accordion, dialog, and form primitives. Lucide React for icons.
+---
 
-**Site components** (`src/components/site/`):
+## Centralized Schema Implementation
 
-- `Header.tsx` — Sticky navigation with scroll-spy active state, smooth-scroll section links, mobile slide-out menu panel.
-- `Footer.tsx` — Four-column grid (brand, pages, support, legal) with social icon links (TikTok, Instagram, Facebook, X) and oversized wordmark.
-- `LandingPage.tsx` — Shared page template used by `/` and all `/roofing/[city]` pages. Accepts optional `locationName` and `countyName` props to personalize copy.
-- `ProjectShowcase.tsx` — Client component. Before/during/after three-step image grid with lightbox overlay. Project data lives in the `showcaseProjects` array at the top of the file.
-- `ReviewsSection.tsx` — Customer testimonials with star ratings and trust badges.
-- `RoofingEstimator.tsx` — Interactive cost estimator form (client component).
-- `Logo.tsx` — Brand logo with shimmer animation variant.
+All structured metadata (JSON-LD) is managed dynamically by the centralized schema engine in `src/lib/schema.ts` to ensure 100% Google Rich Results compliance, error-free builds, and zero duplicate declarations.
 
-**Data** (`src/data/`):
+### Exported Builder Functions:
 
-- `cities.ts` — Array of 120+ city objects with `name`, `slug`, `county`, and SEO metadata used to generate all `/roofing/[city]` static pages.
-
-**Key routes:**
-
-- `/` — Home (static)
-- `/locations` — City directory (static)
-- `/faq` — FAQ accordion page (static)
-- `/privacy-policy` — Privacy Policy (static)
-- `/terms-of-service` — Terms of Service (static)
-- `/roofing/[city]` — Dynamic city pages (SSG via `generateStaticParams`)
-- `/sitemap.xml` — Auto-generated sitemap including all static and city pages
+- `buildWebSiteSchema()`: Injected once in the root layout. Declares global WebSite parameters and search-engine index identifiers.
+- `buildOrganizationSchema(reviewsTexts?: string[])`: Global Organization and LocalBusiness schema injected on all pages. Features the collective 5-star aggregate rating, 104 total reviews, social links, and dynamically derives service areas by parsing city mentions from reviews.
+- `buildHomeSchema()`: Home-page specific LocalBusiness block establishing the broad two-county administrative service bounds and the global roofing services `OfferCatalog`.
+- `buildCitySchema(city: City)`: Deeply localized, programmatic LocalBusiness schema mapped for each of the 122 city routes. Includes:
+  - Scoped review IDs (`#review-1`, etc.) matching the city page URL to eliminate cross-page schema conflicts in Google Search Console.
+  - Localized `OfferCatalog` mapping 4 core services directly to the targeted city.
+  - Localized service areas nested by county structures (`containedInPlace`).
+  - Precise geo-coordinates via `serviceArea.geoMidpoint` (`GeoCoordinates` using city `lat`/`lng`) and a `GeoCircle` with a 15,000-meter radius (15km radius of operation around the center of each city).
+- `buildFaqSchema(items: FaqItem[])`: FAQPage schema mapping 16 frequently asked questions to structured Q&A nodes.
+- `buildLocationsListSchema(cities: City[])`: Generates an ItemList indexing all 122 static location routes to optimize search engine crawl paths.
+- `buildBreadcrumbSchema(items: BreadcrumbEntry[], idSuffix?)`: Creates generic or scoped BreadcrumbList structured arrays for FAQ, Locations, and legal pages.
+- `extractCitiesFromTexts(texts: string[], _citiesList?: City[])`: Crawls text arrays (like customer review descriptions) using precompiled case-insensitive regex patterns to match against normalized city names. Used to dynamically build the organization's regional service bounds.
