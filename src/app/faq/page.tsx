@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { buildFaqSchema, buildBreadcrumbSchema, type FaqItem } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
@@ -25,7 +26,8 @@ export const metadata: Metadata = {
 
 // FAQ Data directly from faq.md
 // To add, edit, or remove questions, update this list.
-const faqItems = [
+// Each item is automatically included in the FAQPage JSON-LD schema below.
+const faqItems: FaqItem[] = [
   {
     id: "faq-materials",
     question: "What are the most common types of roofing materials used in the area?",
@@ -127,6 +129,23 @@ const faqItems = [
 export default function FAQPage() {
   return (
     <div className="min-h-screen bg-background">
+      {/* FAQPage + BreadcrumbList JSON-LD — enables Google FAQ Rich Result */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqSchema(faqItems)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            buildBreadcrumbSchema([
+              { name: "Home", url: "https://elevateroofingservices.com/" },
+              { name: "FAQ", url: "https://elevateroofingservices.com/faq/" },
+            ])
+          ),
+        }}
+      />
+
       <Header />
 
       {/* Hero Intro Section */}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LandingPage } from "@/components/site/LandingPage";
+import { buildHomeSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Elevate Roofing Services | LA & Orange County Roofers",
@@ -18,20 +19,11 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "RoofingContractor",
-    name: "Elevate Roofing Services",
-    areaServed: ["Los Angeles County", "Orange County"],
-    telephone: "+1-800-555-0199",
-    priceRange: "$$",
-  };
-
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildHomeSchema()) }}
       />
       <LandingPage />
     </>

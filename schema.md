@@ -13,7 +13,8 @@
       "url": "https://elevateroofingservices.com/roofing-agoura-hills/",
       "telephone": "+15624692089",
       "image": "https://elevateroofingservices.com/images/elevate-roofing-agoura-hills.jpg",
-      "description": "Elevate Roofing provides expert roofing services in Agoura Hills, Los Angeles County. Licensed and trusted local roofing contractor serving Agoura Hills and surrounding areas with roof repair, replacement, and installation.",
+      "description": "Elevate Roofing provid
+      es expert roofing services in Agoura Hills, Los Angeles County. Licensed and trusted local roofing contractor serving Agoura Hills and surrounding areas with roof repair, replacement, and installation.",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Agoura Hills",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LandingPage } from "@/components/site/LandingPage";
 import { cities, findCity } from "@/data/cities";
+import { buildCitySchema } from "@/lib/schema";
 
 interface Props {
   params: Promise<{ city: string }>;
@@ -40,24 +41,18 @@ export default async function CityPage({ params }: Props) {
 
   if (!city) notFound();
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "RoofingContractor",
-    name: `Elevate Roofing Services — ${city.name}`,
-    areaServed: {
-      "@type": "City",
-      name: city.name,
-      containedInPlace: city.county,
-    },
-    telephone: "+1-562-469-2089",
-    priceRange: "$$",
-  };
-
   return (
     <>
+      {/*
+        buildCitySchema() injects a fully Google-compliant LocalBusiness schema:
+        - Precise GeoCoordinates (lat/lng from cities.ts)
+        - Localized hasOfferCatalog (4 services × city name)
+        - Correct containedInPlace as AdministrativeArea object
+        - Canonical @id, url, image, openingHours, sameAs
+      */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildCitySchema(city)) }}
       />
       <LandingPage locationName={city.name} countyName={city.county} />
     </>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { cities } from "@/data/cities";
+import { buildLocationsListSchema, buildBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Service Locations | Elevate Roofing — LA & Orange County",
@@ -24,6 +25,25 @@ export default function LocationsPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* ItemList + BreadcrumbList JSON-LD — signals all city pages to crawlers */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildLocationsListSchema(cities)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            buildBreadcrumbSchema([
+              { name: "Home", url: "https://elevateroofingservices.com/" },
+              { name: "Locations", url: "https://elevateroofingservices.com/locations/" },
+            ])
+          ),
+        }}
+      />
+
       <Header />
       <section className="mx-auto max-w-7xl px-6 py-16">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">

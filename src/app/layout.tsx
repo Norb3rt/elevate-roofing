@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import React from "react";
 import "../styles.css";
 import { Providers } from "./providers";
+import { buildWebSiteSchema, buildOrganizationSchema } from "@/lib/schema";
 
 export const viewport: Viewport = {
   themeColor: "#004D77",
@@ -35,6 +36,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap"
+        />
+        {/* Global identity schemas — injected once, present on every page */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(buildWebSiteSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(buildOrganizationSchema()),
+          }}
         />
       </head>
       <body suppressHydrationWarning>
