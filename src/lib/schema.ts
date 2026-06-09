@@ -299,7 +299,7 @@ export function buildOrganizationSchema(
     slogan: SLOGAN,
     award: AWARDS,
     knowsAbout: KNOWS_ABOUT,
-    serviceType: "Roofing Contractor Services",
+
     hasMap: MAPS_CID,
     logo: {
       "@type": "ImageObject",
@@ -343,7 +343,7 @@ export function buildHomeSchema(): JsonLdObject {
     telephone: PHONE,
     priceRange: PRICE_RANGE,
     slogan: SLOGAN,
-    serviceType: "Roofing Contractor Services",
+
     hasMap: MAPS_CID,
     image: {
       "@type": "ImageObject",
@@ -453,7 +453,7 @@ export function buildCitySchema(city: City): JsonLdObject {
     telephone: PHONE,
     priceRange: PRICE_RANGE,
     slogan: SLOGAN,
-    serviceType: "Roofing Contractor Services",
+
     hasMap: MAPS_CID,
     image: {
       "@type": "ImageObject",
