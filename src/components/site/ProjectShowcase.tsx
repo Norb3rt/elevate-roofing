@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 /* ── Project Showcase assets ─────────────────────────────────── */
 import before1 from "@/assets/roofing-after-before-imgs/before-roof-replacement-1.jpeg";
@@ -152,13 +153,14 @@ export function ProjectShowcase() {
                   >
                     {/* Step image */}
                     <div className="relative h-52 overflow-hidden">
-                      <img
-                        src={step.img.src}
+                      <Image
+                        src={step.img}
                         alt={`${project.title} — ${step.label}`}
-                        width={896}
-                        height={600}
+                        fill
                         loading="lazy"
-                        className="h-full w-full object-cover transition duration-500 group-hover/card:scale-105"
+                        quality={75}
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover transition duration-500 group-hover/card:scale-105"
                       />
                       {/* Step number badge */}
                       <span className="absolute top-3 left-3 grid h-8 w-8 place-items-center rounded-full bg-primary text-xs font-bold text-primary-foreground shadow-lg">
@@ -228,10 +230,13 @@ export function ProjectShowcase() {
 
             {/* Full-size image */}
             <div className="relative flex-1 overflow-hidden bg-black">
-              <img
+              <Image
                 src={lightbox.src}
                 alt={lightbox.alt}
-                className="h-full max-h-[65vh] w-full object-contain"
+                fill
+                quality={90}
+                sizes="(max-width: 1024px) 100vw, 900px"
+                className="object-contain"
               />
             </div>
 

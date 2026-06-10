@@ -1,12 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
+import dynamic from "next/dynamic";
 import { Header } from "@/components/site/Header";
-import { RoofingEstimator } from "@/components/site/RoofingEstimator";
-import { ProjectShowcase } from "@/components/site/ProjectShowcase";
 import { VeteransBanner } from "@/components/site/VeteransBanner";
 
-import { Footer } from "@/components/site/Footer";
-import { ServiceAreaMap } from "@/components/site/ServiceAreaMap";
-import { ReviewsSection } from "@/components/site/ReviewsSection";
 import hero from "@/assets/hero-roofing.jpeg";
 import home from "@/assets/home-exterior.jpg";
 import inspecting from "@/assets/roofer-inspecting.jpg";
@@ -16,6 +13,27 @@ import replacement from "@/assets/roof-replacement.jpg";
 import portrait from "@/assets/contractor-portrait.jpg";
 import team from "@/assets/team-working.jpg";
 
+/* ── Code-split below-the-fold components ────────────────────────── */
+const ProjectShowcase = dynamic(
+  () => import("@/components/site/ProjectShowcase").then((m) => ({ default: m.ProjectShowcase })),
+  { ssr: true },
+);
+const ReviewsSection = dynamic(
+  () => import("@/components/site/ReviewsSection").then((m) => ({ default: m.ReviewsSection })),
+  { ssr: true },
+);
+const RoofingEstimator = dynamic(
+  () => import("@/components/site/RoofingEstimator").then((m) => ({ default: m.RoofingEstimator })),
+  { ssr: true },
+);
+const ServiceAreaMap = dynamic(
+  () => import("@/components/site/ServiceAreaMap").then((m) => ({ default: m.ServiceAreaMap })),
+  { ssr: true },
+);
+const Footer = dynamic(
+  () => import("@/components/site/Footer").then((m) => ({ default: m.Footer })),
+  { ssr: true },
+);
 
 interface LandingPageProps {
   locationName?: string;
@@ -67,13 +85,15 @@ export function LandingPage({ locationName, countyName }: LandingPageProps) {
 
       {/* HERO */}
       <section className="px-4 pt-6">
-        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl">
-          <img
-            src={hero.src}
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl h-[78vh] min-h-[520px]">
+          <Image
+            src={hero}
             alt={`Professional roofing ${where}`}
-            width={1920}
-            height={1080}
-            className="h-[78vh] min-h-[520px] w-full object-cover"
+            fill
+            priority
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            quality={80}
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-primary/30 via-primary/10 to-primary/70" />
           <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-12">
@@ -128,21 +148,21 @@ export function LandingPage({ locationName, countyName }: LandingPageProps) {
       {/* Section 2 — Primary Home */}
       <section className="mx-auto max-w-7xl px-6 py-20">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div>
-            <h2 className="text-4xl font-bold text-foreground md:text-5xl">
-              Your Primary Home
-              <br />
-              <span className="text-primary/70">Deserves Top-Tier Roofing</span>
-            </h2>
-          </div>
+          <h2 className="text-4xl font-bold text-foreground md:text-5xl">
+            Your Primary Home
+            <br />
+            <span className="text-primary/70">Deserves Top-Tier Roofing</span>
+          </h2>
           <div className="flex items-start gap-4 md:max-w-sm">
-            <img
-              src={repair.src}
+            <Image
+              src={repair}
               alt="Roof close-up"
               width={120}
               height={80}
               loading="lazy"
+              quality={75}
               className="h-20 w-28 flex-none rounded-2xl object-cover"
+              style={{ width: "auto", height: "auto" }}
             />
             <p className="text-sm text-muted-foreground">
               From innovative installations to swift repairs, our expert team delivers durability,
@@ -153,13 +173,16 @@ export function LandingPage({ locationName, countyName }: LandingPageProps) {
 
         <div className="mt-10 grid gap-5 md:grid-cols-[1fr_1.4fr_1fr]">
           <div className="overflow-hidden rounded-3xl bg-card shadow-sm ring-1 ring-border">
-            <img
-              src={home.src}
+            <Image
+              src={home}
               alt="Modern home with new tile roof"
-              width={1024}
-              height={768}
+              width={600}
+              height={450}
               loading="lazy"
+              quality={75}
+              sizes="(max-width: 768px) 100vw, 33vw"
               className="h-56 w-full object-cover"
+              style={{ width: "100%", height: "auto" }}
             />
             <div className="p-6">
               <p className="text-xs uppercase tracking-wider text-muted-foreground">
@@ -179,13 +202,14 @@ export function LandingPage({ locationName, countyName }: LandingPageProps) {
             href="#contact"
             className="group relative block overflow-hidden rounded-3xl h-[320px] md:h-auto"
           >
-            <img
-              src={inspecting.src}
+            <Image
+              src={inspecting}
               alt="Roofer inspecting tile roof"
-              width={1280}
-              height={896}
+              fill
               loading="lazy"
-              className="h-full max-h-[460px] w-full object-cover transition duration-500 group-hover:scale-105"
+              quality={75}
+              sizes="(max-width: 768px) 100vw, 45vw"
+              className="object-cover transition duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
               <h3 className="text-2xl font-bold text-white mt-1">Instant Roof Estimate</h3>
@@ -252,13 +276,15 @@ export function LandingPage({ locationName, countyName }: LandingPageProps) {
         <div className="mt-10 grid gap-5 md:grid-cols-4">
           <div className="relative overflow-hidden rounded-3xl bg-brand-gradient p-6 text-primary-foreground">
             <p className="text-xs font-semibold uppercase tracking-wider">Call Now</p>
-            <img
-              src={portrait.src}
+            <Image
+              src={portrait}
               alt="Roofing contractor"
-              width={768}
-              height={896}
+              width={300}
+              height={350}
               loading="lazy"
+              quality={75}
               className="mx-auto mt-2 h-40 w-auto object-contain"
+              style={{ width: "auto", height: "auto" }}
             />
             <a
               href="tel:+15624692089"
@@ -284,14 +310,15 @@ export function LandingPage({ locationName, countyName }: LandingPageProps) {
                 <h3 className="text-lg font-bold text-foreground">{s.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
               </div>
-              <div className="relative">
-                <img
-                  src={s.img.src}
+              <div className="relative h-44">
+                <Image
+                  src={s.img}
                   alt={s.title}
-                  width={896}
-                  height={768}
+                  fill
                   loading="lazy"
-                  className="h-44 w-full object-cover"
+                  quality={75}
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                  className="object-cover"
                 />
                 <span className="absolute bottom-3 right-3 grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground shadow transition group-hover:scale-110">
                   →
@@ -341,14 +368,17 @@ export function LandingPage({ locationName, countyName }: LandingPageProps) {
             </a>
           </div>
           <div className="grid grid-cols-[1.1fr_1fr] gap-4">
-            <img
-              src={team.src}
-              alt="Roofing team working"
-              width={1024}
-              height={896}
-              loading="lazy"
-              className="h-full max-h-[420px] w-full rounded-3xl object-cover"
-            />
+            <div className="relative h-full max-h-[420px] overflow-hidden rounded-3xl">
+              <Image
+                src={team}
+                alt="Roofing team working"
+                fill
+                loading="lazy"
+                quality={75}
+                sizes="(max-width: 768px) 55vw, 30vw"
+                className="object-cover"
+              />
+            </div>
             <div className="flex flex-col gap-3">
               <details
                 open

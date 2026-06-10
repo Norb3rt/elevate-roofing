@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import logoSrc from "@/assets/elevate-logo.png";
 
 type LogoProps = {
@@ -7,7 +8,7 @@ type LogoProps = {
 };
 
 export function Logo({ variant = "header", className = "" }: LogoProps) {
-  const height = variant === "footer" ? "h-14" : "h-11";
+  const h = variant === "footer" ? 56 : 44;
   return (
     <Link
       href="/"
@@ -15,10 +16,15 @@ export function Logo({ variant = "header", className = "" }: LogoProps) {
       className={`group inline-flex items-center ${className}`}
     >
       <span className="logo-reveal relative inline-block">
-        <img
-          src={logoSrc.src}
+        <Image
+          src={logoSrc}
           alt="Elevate Roofing Services"
-          className={`${height} w-auto select-none drop-shadow-[0_2px_6px_rgba(0,77,119,0.15)] transition-transform duration-500 group-hover:scale-[1.02]`}
+          width={Math.round(h * (logoSrc.width / logoSrc.height))}
+          height={h}
+          priority
+          quality={85}
+          className={`${variant === "footer" ? "h-14" : "h-11"} w-auto select-none drop-shadow-[0_2px_6px_rgba(0,77,119,0.15)] transition-transform duration-500 group-hover:scale-[1.02]`}
+          style={{ width: "auto", height: "auto" }}
           draggable={false}
         />
         <span aria-hidden className="logo-shimmer" />

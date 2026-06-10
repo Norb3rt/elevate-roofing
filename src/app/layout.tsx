@@ -1,8 +1,22 @@
 import type { Metadata, Viewport } from "next";
 import React from "react";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "../styles.css";
 import { Providers } from "./providers";
 import { buildWebSiteSchema, buildOrganizationSchema } from "@/lib/schema";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jakarta",
+});
 
 export const viewport: Viewport = {
   themeColor: "#004D77",
@@ -29,14 +43,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${jakarta.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap"
-        />
         {/* Global identity schemas — injected once, present on every page */}
         <script
           type="application/ld+json"
@@ -57,3 +65,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
