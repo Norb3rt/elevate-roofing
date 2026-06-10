@@ -23,6 +23,15 @@ const PHONE = "+15624692089";
 const PRICE_RANGE = "$$";
 const MAPS_CID ="https://maps.google.com/?cid=5374090915489518833&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ";
 
+const BUSINESS_ADDRESS = {
+  "@type": "PostalAddress",
+  streetAddress: "16629 Indiana Ave",
+  addressLocality: "Paramount",
+  addressRegion: "CA",
+  postalCode: "90723",
+  addressCountry: "US",
+};
+
 // FIX 2: ratingValue must be a number string per schema.org spec for
 // AggregateRating — keep as number here; JSON.stringify emits it correctly.
 const RATING_VALUE = 5;
@@ -307,14 +316,7 @@ export function buildOrganizationSchema(
       width: 300,
       height: 60,
     },
-    address: {
-      "@type": "PostalAddress",
-      "streetAddress": "16629 Indiana Ave",
-      "addressLocality": "Paramount",
-      "addressRegion": "CA",
-      "postalCode": "90723",
-      "addressCountry": "US"
-    },
+    address: BUSINESS_ADDRESS,
     areaServed,
     openingHoursSpecification: OPENING_HOURS,
     sameAs: [MAPS_CID],
@@ -354,11 +356,7 @@ export function buildHomeSchema(): JsonLdObject {
     },
     description:
       "Elevate Roofing Services provides licensed, expert roofing across Los Angeles County and Orange County. Specializing in roof repair, replacement, new installation, and emergency roofing services.",
-    address: {
-      "@type": "PostalAddress",
-      addressRegion: "CA",
-      addressCountry: "US",
-    },
+    address: BUSINESS_ADDRESS,
     areaServed: [
       { "@type": "AdministrativeArea", name: "Los Angeles County" },
       { "@type": "AdministrativeArea", name: "Orange County" },
@@ -468,12 +466,7 @@ export function buildCitySchema(city: City): JsonLdObject {
       url: `${BASE_URL}/images/elevate-roofing-services.jpg`,
     },
     description: `Elevate Roofing provides expert roofing services in ${city.name}, ${city.county}. Licensed and trusted local roofing contractor serving ${city.name} and surrounding areas with roof repair, replacement, and installation.`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: city.name,
-      addressRegion: "CA",
-      addressCountry: "US",
-    },
+    address: BUSINESS_ADDRESS,
     areaServed,
     hasOfferCatalog: offerCatalog,
     openingHoursSpecification: OPENING_HOURS,
