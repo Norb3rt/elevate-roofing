@@ -432,7 +432,7 @@ export function buildCitySchema(city: City): JsonLdObject {
         serviceType: service,
         provider: { "@id": `${BASE_URL}/#organization` },
         areaServed: { "@type": "City", name: city.name },
-        serviceChannel: {
+        availableChannel: {
           "@type": "ServiceChannel",
           serviceUrl: pageUrl,
           availableLanguage: { "@type": "Language", name: "English" },
