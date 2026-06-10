@@ -21,8 +21,7 @@ import { cities as CITIES } from "@/data/cities";
 const BASE_URL = "https://elevateroofingservices.com";
 const PHONE = "+15624692089";
 const PRICE_RANGE = "$$";
-const MAPS_CID =
-  "https://www.google.com/maps?cid=0xe8d4fd261c481b:0x4a949b36e86814f1";
+const MAPS_CID ="https://maps.google.com/?cid=5374090915489518833&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ";
 
 // FIX 2: ratingValue must be a number string per schema.org spec for
 // AggregateRating — keep as number here; JSON.stringify emits it correctly.
@@ -310,8 +309,11 @@ export function buildOrganizationSchema(
     },
     address: {
       "@type": "PostalAddress",
-      addressRegion: "CA",
-      addressCountry: "US",
+      "streetAddress": "16629 Indiana Ave",
+      "addressLocality": "Paramount",
+      "addressRegion": "CA",
+      "postalCode": "90723",
+      "addressCountry": "US"
     },
     areaServed,
     openingHoursSpecification: OPENING_HOURS,
