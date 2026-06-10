@@ -304,7 +304,7 @@ export function buildOrganizationSchema(
     logo: {
       "@type": "ImageObject",
       "@id": `${BASE_URL}/#logo`,
-      url: `${BASE_URL}/images/elevate-roofing-logo.jpg`,
+      url: `${BASE_URL}/images/elevate-logo.png`,
       width: 300,
       height: 60,
     },
@@ -337,7 +337,7 @@ export function buildHomeSchema(): JsonLdObject {
     "@type": ["RoofingContractor", "LocalBusiness"],
     // FIX 5: Trailing slash consistency — canonical @id must match the
     // actual canonical URL used in <link rel="canonical">. Home page = no trailing slash.
-    "@id": `${BASE_URL}/#business`,
+    "@id": `${BASE_URL}/#organization`,
     name: "Elevate Roofing Services",
     url: BASE_URL,
     telephone: PHONE,
@@ -408,7 +408,7 @@ export function buildHomeSchema(): JsonLdObject {
  */
 export function buildCitySchema(city: City): JsonLdObject {
   const citySlug = city.slug;
-  const pageUrl = `${BASE_URL}/roofing/${citySlug}/`;
+  const pageUrl = `${BASE_URL}/roofing/${citySlug}`;
 
   // Use pre-typed REVIEW_BODIES for city extraction
   const relatedCitySlugs = extractCitiesFromTexts(REVIEW_BODIES);
@@ -430,6 +430,11 @@ export function buildCitySchema(city: City): JsonLdObject {
         serviceType: service,
         provider: { "@id": `${BASE_URL}/#organization` },
         areaServed: { "@type": "City", name: city.name },
+        serviceChannel: {
+          "@type": "ServiceChannel",
+          serviceUrl: pageUrl,
+          availableLanguage: { "@type": "Language", name: "English" },
+        },
       },
       eligibleRegion: { "@type": "City", name: city.name },
     })),
@@ -458,7 +463,7 @@ export function buildCitySchema(city: City): JsonLdObject {
     image: {
       "@type": "ImageObject",
       "@id": `${pageUrl}#image`,
-      url: `${BASE_URL}/images/elevate-roofing-${citySlug}.jpg`,
+      url: `${BASE_URL}/images/elevate-roofing-services.jpg`,
     },
     description: `Elevate Roofing provides expert roofing services in ${city.name}, ${city.county}. Licensed and trusted local roofing contractor serving ${city.name} and surrounding areas with roof repair, replacement, and installation.`,
     address: {
@@ -483,18 +488,6 @@ export function buildCitySchema(city: City): JsonLdObject {
       ...review,
       "@id": `${pageUrl}#review-${index + 1}`,
     })),
-    // FIX 7: serviceArea was declared twice — once as a placeholder skeleton
-    // `{ "@type": "GeoCircle", geoRadius: "15000" }` (no midpoint) and then
-    // overwritten by the geo block below. The first declaration was dead code
-    // and emitted an incomplete GeoCircle for cities where lat/lng is always
-    // defined. Removed the placeholder entirely; the block below is the
-    // sole source of truth.
-    serviceChannel: {
-      "@type": "ServiceChannel",
-      serviceUrl: pageUrl,
-      // availableLanguage must be a Language object or BCP 47 string, not an array of strings
-      availableLanguage: { "@type": "Language", name: "English" },
-    },
   };
 
   // Inject precise GeoCoordinates — always available post-migration
@@ -507,7 +500,7 @@ export function buildCitySchema(city: City): JsonLdObject {
         latitude: city.lat,
         longitude: city.lng,
       },
-      geoRadius: "15000",
+      geoRadius: 15000,
     };
     schema.geo = {
       "@type": "GeoCoordinates",
@@ -533,7 +526,7 @@ export interface FaqItem {
  * Each item becomes a Question + Answer pair in mainEntity.
  */
 export function buildFaqSchema(items: FaqItem[]): JsonLdObject {
-  const pageUrl = `${BASE_URL}/faq/`;
+  const pageUrl = `${BASE_URL}/faq`;
 
   return withContext({
     "@type": "FAQPage",
@@ -560,7 +553,7 @@ export function buildFaqSchema(items: FaqItem[]): JsonLdObject {
  * Generates an ItemList of all city landing pages for crawlability.
  */
 export function buildLocationsListSchema(cities: City[]): JsonLdObject {
-  const pageUrl = `${BASE_URL}/locations/`;
+  const pageUrl = `${BASE_URL}/locations`;
 
   return withContext({
     "@type": "ItemList",
@@ -574,7 +567,7 @@ export function buildLocationsListSchema(cities: City[]): JsonLdObject {
       "@id": `${pageUrl}#item-${i + 1}`,
       position: i + 1,
       name: `Roofing in ${city.name}`,
-      url: `${BASE_URL}/roofing/${city.slug}/`,
+      url: `${BASE_URL}/roofing/${city.slug}`,
     })),
   });
 }

@@ -38,7 +38,7 @@ export default function LocationsPage() {
           __html: JSON.stringify(
             buildBreadcrumbSchema([
               { name: "Home", url: "https://elevateroofingservices.com/" },
-              { name: "Locations", url: "https://elevateroofingservices.com/locations/" },
+              { name: "Locations", url: "https://elevateroofingservices.com/locations" },
             ])
           ),
         }}

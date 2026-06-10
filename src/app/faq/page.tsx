@@ -140,7 +140,7 @@ export default function FAQPage() {
           __html: JSON.stringify(
             buildBreadcrumbSchema([
               { name: "Home", url: "https://elevateroofingservices.com/" },
-              { name: "FAQ", url: "https://elevateroofingservices.com/faq/" },
+              { name: "FAQ", url: "https://elevateroofingservices.com/faq" },
             ])
           ),
         }}
