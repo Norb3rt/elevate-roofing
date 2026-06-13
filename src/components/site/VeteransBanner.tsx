@@ -7,12 +7,15 @@
    ────────────────────────────────────────────────────────────── */
 
 /* ── Editable content ────────────────────────────────────────── */
-const DISCOUNT_VALUE = "10% OFF";
-const HEADLINE = "Veterans Save 10%";
+const DISCOUNT_VALUE = "$599 Off";
+const HEADLINE = "Veterans & Military Save $599";
 const SUBHEADLINE = "Thank you for your service.";
 const BODY_COPY =
-  "As a small token of our gratitude, all active-duty military and veterans receive an exclusive 10% discount on any roofing service. Quality protection for those who protected us.";
-const CTA_LABEL = "Claim Discount";
+  "As a small token of our gratitude, all active-duty military, and veterans receive an exclusive $599 off a full roof replacement. Quality protection for those who protected us.";
+const CLAIM_INSTRUCTIONS =
+  "To claim your discount, simply provide one of the following at time of service:";
+const CLAIM_ITEMS = ["Military ID (active duty)", "DD-214 (veterans)", "VA card"];
+const CTA_LABEL = "Claim Your Discount ";
 const CTA_HREF = "#contact";
 
 export function VeteransBanner() {
@@ -79,6 +82,14 @@ export function VeteransBanner() {
               <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground md:mt-4 md:text-[0.935rem]">
                 {BODY_COPY}
               </p>
+              <p className="mt-3 max-w-lg text-xs leading-relaxed text-muted-foreground">
+                {CLAIM_INSTRUCTIONS}
+              </p>
+              <ul className="mt-2 max-w-lg text-xs leading-relaxed text-muted-foreground space-y-1 list-disc pl-5">
+                {CLAIM_ITEMS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </div>
           </div>
 
